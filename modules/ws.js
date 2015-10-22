@@ -207,7 +207,6 @@ function WebSocketServer(options) {
     this.socket = null;
     options = options || {};
     this.port = options.port || 80;
-    var sha1 = require("sha1");
 }
 
 WebSocket.prototype.initClient = function () {

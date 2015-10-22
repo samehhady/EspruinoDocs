@@ -1,4 +1,4 @@
-/* Copyright (c) 2015 Sameh Hady. See the file LICENSE for copying permission. */
+/* Original by: Webtoolkit.info, improved by: Michael White & Kevin van Zonneveld. See the file LICENSE for copying permission. */
 
 function sha1() {
     }

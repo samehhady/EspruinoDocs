@@ -45,6 +45,14 @@
  
  //Broadcast message to specific room
  ws.broadcast("Hello Room", "Espruino");
+ 
+ // WebSocket Server
+ var WebSocketServer = require("ws").Server;
+ var wss = new WebSocketServer({port: 8080});
+ wss.on('connection', function(ws) {
+  ws.on('message', function(message) {
+    console.log('received: %s', message);
+  });
  ```
  */
 
@@ -196,6 +204,12 @@ function WebSocket(host, options) {
     this.keepAlive = options.keepAlive * 1000 || 60000;
 }
 
+function WebSocketServer(options) {
+    this.socket = null;
+    options = options || {};
+    this.port = options.port || 80;
+}
+
 WebSocket.prototype.initializeClient = function () {
     require("net").connect({
         host: this.host,
@@ -304,7 +318,7 @@ exports = function (host, options) {
 };
 
 exports.Server = function (host, options) {
-    var ws = new WebSocket(host, options);
-    ws.initializeServer();
-    return ws;
+    var wss = new WebSocketServer(options);
+    wss.initializeServer();
+    return wss;
 };

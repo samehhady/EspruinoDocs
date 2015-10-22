@@ -223,11 +223,9 @@ WebSocket.prototype.initializeServer = function () {
 
 WebSocket.prototype.onServer = function (socket) {
     this.socket = socket;
-    var ws = this;
-    socket.on('data', this.parseData.bind(this));
-    socket.on('close', function () {ws.emit('close');});
-    this.emit('open');
-    this.waitForHandshake();
+    var wss = this;
+    socket.on('data', this.handleData.bind(this));
+    socket.on('close', function () {wss.emit('close');});
 };
 
 WebSocket.prototype.onConnect = function (socket) {
@@ -286,6 +284,23 @@ WebSocket.prototype.handshake = function () {
 
     for (var index = 0; index < socketHeader.length; index++) {
         this.socket.write(socketHeader[index] + "\r\n");
+    }
+};
+
+WebSocketServer.prototype.handleData = function (data) {
+    var socketHeader = [
+        "HTTP/1.1 101 Switching Protocols",
+        "Upgrade: websocket",
+        "Connection: Upgrade",
+        "Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=",
+        ""
+    ];
+    
+    if (data.indexOf("Sec-WebSocket-Key") > -1) {
+        for (var index = 0; index < socketHeader.length; index++) {
+           this.socket.write(socketHeader[index] + "\r\n");
+        }
+        this.emit('connection', this);
     }
 };
 

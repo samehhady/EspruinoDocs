@@ -192,7 +192,7 @@ var cvt_hex = function (val) {
 
     temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
     return temp.toLowerCase();
-
+}
 function WebSocket(host, options) {
     this.socket = null;
     options = options || {};

@@ -210,14 +210,14 @@ function WebSocketServer(options) {
     var sha1 = require("sha1");
 }
 
-WebSocket.prototype.initializeClient = function () {
+WebSocket.prototype.initClient = function () {
     require("net").connect({
         host: this.host,
         port: this.port
     }, this.onConnect.bind(this));
 };
 
-WebSocket.prototype.initializeServer = function () {
+WebSocket.prototype.initServer = function () {
     require("net").createServer(this.onServer.bind(this)).listen(this.port);
 };
 
@@ -328,12 +328,12 @@ WebSocket.prototype.join = function (room) {
 
 exports = function (host, options) {
     var ws = new WebSocket(host, options);
-    ws.initializeClient();
+    ws.initClient();
     return ws;
 };
 
-exports.Server = function (host, options) {
+exports.Server = function (options) {
     var wss = new WebSocketServer(options);
-    wss.initializeServer();
+    wss.initServer();
     return wss;
 };

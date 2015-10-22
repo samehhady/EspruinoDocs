@@ -1,8 +1,9 @@
 /* Copyright (c) 2015 Sameh Hady. See the file LICENSE for copying permission. */
 
-function sha1(type) {
-if(type == "Encode"){
-  var rotate_left = function (n, s) {
+function sha1() {
+    }
+sha1.prototype.encode = function() {    
+var rotate_left = function (n, s) {
         var t4 = (n << s) | (n >>> (32 - s));
         return t4;
     };
@@ -123,11 +124,6 @@ if(type == "Encode"){
 
     temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
     return temp.toLowerCase();
-    }else{
-      return;
     }
-}
 
-exports.sha1 = function(type) {
-  return new sha1(type);
-}
+exports.sha1 = sha1

@@ -57,16 +57,12 @@ function hexEncode(str) {
     var b = "";
     var x = [];
     for (var i = 0; i < str.length; i += 2) {
-        x.push("0x" + str.substr(i, 2));
+        x.push(String.fromCharCode("0x" + str.substr(i, 2)));
     }
-    for (var i = 0; i < x.length; i++) {
-        b += strChr(x[i]);
-    }
-    return btoa(b);
+    return btoa(x.join(""));
 }
 
-function sha1Encode(str) {
-    str = str + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+function sha1(str) {
     var rotate_left = function (n, s) {
         var t4 = (n << s) | (n >>> (32 - s));
         return t4;
@@ -187,7 +183,7 @@ function sha1Encode(str) {
     }
 
     temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
-    return hexEncode(temp.toLowerCase());
+    return temp.toLowerCase();
 }
 
 function WebSocket(host, options) {

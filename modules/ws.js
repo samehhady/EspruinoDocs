@@ -53,6 +53,20 @@ function strChr(chr) {
     return String.fromCharCode(chr);
 }
 
+function hexToBase64(str) {
+  return btoa(String.fromCharCode.apply(null,
+    str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
+  );
+}
+
+function splitNChars(txt) {
+  var result = [];
+  for (var i = 0; i < txt.length; i += 2) {
+    result.push("0x" + txt.substr(i, 2));
+  }
+  return result.join(" ");
+}
+
 function WebSocket(host, options) {
     this.socket = null;
     options = options || {};

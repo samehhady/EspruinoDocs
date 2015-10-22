@@ -1,14 +1,16 @@
-/* Original by: Webtoolkit.info, improved by: Michael White & Kevin van Zonneveld. See the file LICENSE for copying permission. */
+/* Original by: Webtoolkit.info, improved by: Michael White & Kevin van Zonneveld, moduled by Sameh Hady. See the file LICENSE for copying permission. */
 
 function sha1() {
+    // Currently the encoding part only available.
     }
+    
 sha1.prototype.encode = function() {    
 var rotate_left = function (n, s) {
         var t4 = (n << s) | (n >>> (32 - s));
         return t4;
     };
 
-    var cvt_hex = function (val) {
+var cvt_hex = function (val) {
         var str = '';
         var i;
         var v;
@@ -126,4 +128,4 @@ var rotate_left = function (n, s) {
     return temp.toLowerCase();
     }
 
-exports.sha1 = sha1
+    exports = sha1;
